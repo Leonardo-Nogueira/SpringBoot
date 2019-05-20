@@ -1,4 +1,4 @@
-package com.matera.prjSpringBootFuncionario.controller.error;
+package com.matera.capacitacao.error;
 
 public class DepartamentoNotFoundException extends Exception{
     public DepartamentoNotFoundException() {

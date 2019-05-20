@@ -1,15 +1,15 @@
-package com.matera.prjSpringBootFuncionario.controller.service;
+package com.matera.capacitacao.service;
 
-import com.matera.prjSpringBootFuncionario.controller.error.CargoNotFoundException;
-import com.matera.prjSpringBootFuncionario.controller.error.DepartamentoNotFoundException;
-import com.matera.prjSpringBootFuncionario.controller.error.IdNotFoundException;
-import com.matera.prjSpringBootFuncionario.controller.repository.CargoRepository;
-import com.matera.prjSpringBootFuncionario.controller.repository.DepartamentoRepository;
-import com.matera.prjSpringBootFuncionario.controller.model.Cargo;
-import com.matera.prjSpringBootFuncionario.controller.model.Departamento;
-import com.matera.prjSpringBootFuncionario.controller.model.Funcionario;
-import com.matera.prjSpringBootFuncionario.controller.model.FuncionarioTO;
-import com.matera.prjSpringBootFuncionario.controller.repository.FuncRepository;
+import com.matera.capacitacao.error.CargoNotFoundException;
+import com.matera.capacitacao.error.DepartamentoNotFoundException;
+import com.matera.capacitacao.error.IdNotFoundException;
+import com.matera.capacitacao.repository.CargoRepository;
+import com.matera.capacitacao.repository.DepartamentoRepository;
+import com.matera.capacitacao.model.Cargo;
+import com.matera.capacitacao.model.Departamento;
+import com.matera.capacitacao.model.Funcionario;
+import com.matera.capacitacao.model.FuncionarioTO;
+import com.matera.capacitacao.repository.FuncRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

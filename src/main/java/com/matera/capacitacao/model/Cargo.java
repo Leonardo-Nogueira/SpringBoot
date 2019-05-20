@@ -1,4 +1,4 @@
-package com.matera.prjSpringBootFuncionario.controller.model;
+package com.matera.capacitacao.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

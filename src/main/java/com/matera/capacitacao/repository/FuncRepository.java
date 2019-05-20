@@ -1,5 +1,5 @@
-package com.matera.prjSpringBootFuncionario.controller.repository;
-import com.matera.prjSpringBootFuncionario.controller.model.Funcionario;
+package com.matera.capacitacao.repository;
+import com.matera.capacitacao.model.Funcionario;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

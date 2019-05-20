@@ -1,17 +1,14 @@
-package com.matera.prjSpringBootFuncionario.controller.model;
+package com.matera.capacitacao.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
-public class FuncionarioTO {
-
+@Table(name="funcionario")
+public class Funcionario {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
@@ -30,23 +27,40 @@ public class FuncionarioTO {
     @NotNull
     private int nDependentes;
 
-    @NotNull
-    private String cargo;
+    @ManyToOne
+    @JoinColumn(name = "cargo_id")
+    private Cargo cargo;
 
-    @NotNull
-    private String departamento;
+    @ManyToOne
+    @JoinColumn(name = "departemento_id")
+    private Departamento departamento;
 
     @Email(message = "Insira email corretamente")
     private String email;
 
 
-
-    public Integer getId() {
-        return id;
+    public Funcionario(Integer id, String nome, String sobreNome, double salario, int nDependentes, Cargo cargo, Departamento departamento, String email) {
+        this.id = id;
+        this.nome = nome;
+        this.sobreNome = sobreNome;
+        this.salario = salario;
+        this.nDependentes = nDependentes;
+        this.cargo = cargo;
+        this.departamento = departamento;
+        this.email = email;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Funcionario() {
+
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getNome() {
@@ -81,35 +95,36 @@ public class FuncionarioTO {
         this.nDependentes = nDependentes;
     }
 
-    public String getCargo() {
+
+    public Cargo getCargo() {
         return cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
 
-    public String getDepartamento() {
+    public Departamento getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(String departamento) {
+    public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
 
-    public String getEmail() {
-        return email;
+    public Integer getId() {
+        return id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof FuncionarioTO)) return false;
-        FuncionarioTO that = (FuncionarioTO) o;
+        if (!(o instanceof Funcionario)) return false;
+        Funcionario that = (Funcionario) o;
         return Objects.equals(id, that.id);
     }
 

@@ -1,4 +1,4 @@
-package com.matera.prjSpringBootFuncionario.controller;
+package com.matera.capacitacao;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

@@ -1,10 +1,10 @@
-package com.matera.prjSpringBootFuncionario.controller;
+package com.matera.capacitacao;
 
 
-import com.matera.prjSpringBootFuncionario.controller.model.Cargo;
-import com.matera.prjSpringBootFuncionario.controller.model.Departamento;
-import com.matera.prjSpringBootFuncionario.controller.model.Funcionario;
-import com.matera.prjSpringBootFuncionario.controller.repository.FuncRepository;
+import com.matera.capacitacao.model.Cargo;
+import com.matera.capacitacao.model.Departamento;
+import com.matera.capacitacao.model.Funcionario;
+import com.matera.capacitacao.repository.FuncRepository;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
