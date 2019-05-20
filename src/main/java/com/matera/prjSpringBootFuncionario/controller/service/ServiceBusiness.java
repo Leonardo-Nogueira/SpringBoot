@@ -8,7 +8,7 @@ import com.matera.prjSpringBootFuncionario.controller.repository.DepartamentoRep
 import com.matera.prjSpringBootFuncionario.controller.model.Cargo;
 import com.matera.prjSpringBootFuncionario.controller.model.Departamento;
 import com.matera.prjSpringBootFuncionario.controller.model.Funcionario;
-import com.matera.prjSpringBootFuncionario.controller.model.FuncionarioDAO;
+import com.matera.prjSpringBootFuncionario.controller.model.FuncionarioTO;
 import com.matera.prjSpringBootFuncionario.controller.repository.FuncRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +37,7 @@ que converte por assim dizer uma String em objeto e envia para o banco.
 
  */
 
-    public void adicionarFuncionario(FuncionarioDAO funcionario)  throws DepartamentoNotFoundException, CargoNotFoundException {
+    public void adicionarFuncionario(FuncionarioTO funcionario)  throws DepartamentoNotFoundException, CargoNotFoundException {
         System.out.println("ola");
         Funcionario func = new Funcionario();
         Cargo cargo = buscaEntidadeCargoAtravesDoNomeDoCargo(funcionario);
@@ -53,15 +53,15 @@ que converte por assim dizer uma String em objeto e envia para o banco.
         funcDao.save(func);
     }
 
-    public List<FuncionarioDAO> buscarOsFuncionarios(){
+    public List<FuncionarioTO> buscarOsFuncionarios(){
         Iterable<Funcionario> listaFunc = funcDao.findAll();
-        List<FuncionarioDAO> listaFuncTAO = new ArrayList<>();
+        List<FuncionarioTO> listaFuncTAO = new ArrayList<>();
         for(Funcionario funcionario : listaFunc){
-            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+            FuncionarioTO funcionarioTO = new FuncionarioTO();
             Optional<Cargo> cargo = cargoRepository.findById(funcionario.getCargo().getId());
             Optional<Departamento> departamento = departamentoRepository.findById(funcionario.getDepartamento().getId());
-            funcionarioDAO = buscarCamposOsCamposDosFuncionariosESetarElesNoMetodo(funcionario,cargo,departamento);
-            listaFuncTAO.add(funcionarioDAO);
+            funcionarioTO = buscarCamposOsCamposDosFuncionariosESetarElesNoMetodo(funcionario,cargo,departamento);
+            listaFuncTAO.add(funcionarioTO);
         }
         System.out.println("--------------------");
         System.out.println(listaFuncTAO);
@@ -81,18 +81,18 @@ que converte por assim dizer uma String em objeto e envia para o banco.
 
 
 
-    public void alterarFuncionarioPeloIdInserido(FuncionarioDAO funcionarioDAO, Integer id) throws IdNotFoundException{
+    public void alterarFuncionarioPeloIdInserido(FuncionarioTO funcionarioTO, Integer id) throws IdNotFoundException{
         Optional<Funcionario> listaFun =funcDao.findById(id);
 
-        Cargo cargo = buscaEntidadeCargoAtravesDoNomeDoCargo(funcionarioDAO);
-        Departamento departamento = buscaEntidadeDepartamentoAtravesDoNomeDoDepartamento(funcionarioDAO);
+        Cargo cargo = buscaEntidadeCargoAtravesDoNomeDoCargo(funcionarioTO);
+        Departamento departamento = buscaEntidadeDepartamentoAtravesDoNomeDoDepartamento(funcionarioTO);
         if(listaFun.isPresent()){
             Funcionario funcionarioQueEstaPersistidoNoBanco = listaFun.get();
-            funcionarioQueEstaPersistidoNoBanco.setNome(funcionarioDAO.getNome());
-            funcionarioQueEstaPersistidoNoBanco.setSobreNome(funcionarioDAO.getSobreNome());
-            funcionarioQueEstaPersistidoNoBanco.setSalario(funcionarioDAO.getSalario());
-            funcionarioQueEstaPersistidoNoBanco.setnDependentes(funcionarioDAO.getnDependentes());
-            funcionarioQueEstaPersistidoNoBanco.setEmail(funcionarioDAO.getEmail());
+            funcionarioQueEstaPersistidoNoBanco.setNome(funcionarioTO.getNome());
+            funcionarioQueEstaPersistidoNoBanco.setSobreNome(funcionarioTO.getSobreNome());
+            funcionarioQueEstaPersistidoNoBanco.setSalario(funcionarioTO.getSalario());
+            funcionarioQueEstaPersistidoNoBanco.setnDependentes(funcionarioTO.getnDependentes());
+            funcionarioQueEstaPersistidoNoBanco.setEmail(funcionarioTO.getEmail());
             funcionarioQueEstaPersistidoNoBanco.setCargo(cargo);
             funcionarioQueEstaPersistidoNoBanco.setDepartamento(departamento);
 
@@ -110,9 +110,9 @@ que converte por assim dizer uma String em objeto e envia para o banco.
 
 
 
-    public FuncionarioDAO buscarCamposOsCamposDosFuncionariosESetarElesNoMetodo(Funcionario funcionario, Optional<Cargo>cargo, Optional<Departamento>departemento){
+    public FuncionarioTO buscarCamposOsCamposDosFuncionariosESetarElesNoMetodo(Funcionario funcionario, Optional<Cargo>cargo, Optional<Departamento>departemento){
 
-        FuncionarioDAO funcTAO = new FuncionarioDAO();
+        FuncionarioTO funcTAO = new FuncionarioTO();
         Optional<Cargo> verSeCargoExiste = cargo;
         if(verSeCargoExiste.isPresent()){
             Cargo cargoVer = verSeCargoExiste.get();
@@ -131,13 +131,13 @@ que converte por assim dizer uma String em objeto e envia para o banco.
         funcTAO.setnDependentes(funcionario.getnDependentes());
         return funcTAO;
     }
-    public Cargo buscaEntidadeCargoAtravesDoNomeDoCargo(FuncionarioDAO funcionario) {
+    public Cargo buscaEntidadeCargoAtravesDoNomeDoCargo(FuncionarioTO funcionario) {
         String nomeDoCargo = funcionario.getCargo();
         Optional<Cargo> optionalCargo = cargoRepository.findByCargo(nomeDoCargo);
         return optionalCargo.get();
 
     }
-    public Departamento buscaEntidadeDepartamentoAtravesDoNomeDoDepartamento(FuncionarioDAO funcionario) {
+    public Departamento buscaEntidadeDepartamentoAtravesDoNomeDoDepartamento(FuncionarioTO funcionario) {
         String nomeDoDepartamento = funcionario.getDepartamento();
         Optional<Departamento> optionalDepartamento = departamentoRepository.findByDepartamento(nomeDoDepartamento);
         return optionalDepartamento.get();

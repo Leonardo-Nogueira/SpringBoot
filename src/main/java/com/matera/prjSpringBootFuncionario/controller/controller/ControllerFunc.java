@@ -5,7 +5,7 @@ import com.matera.prjSpringBootFuncionario.controller.error.CargoNotFoundExcepti
 import com.matera.prjSpringBootFuncionario.controller.error.DepartamentoNotFoundException;
 import com.matera.prjSpringBootFuncionario.controller.error.IdNotFoundException;
 import com.matera.prjSpringBootFuncionario.controller.model.Funcionario;
-import com.matera.prjSpringBootFuncionario.controller.model.FuncionarioDAO;
+import com.matera.prjSpringBootFuncionario.controller.model.FuncionarioTO;
 import com.matera.prjSpringBootFuncionario.controller.service.ServiceBusiness;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class ControllerFunc {
 
 
     @PostMapping
-    public ResponseEntity<FuncionarioDAO> inserirFuncionario(@RequestBody FuncionarioDAO funcionario) {
+    public ResponseEntity<FuncionarioTO> inserirFuncionario(@RequestBody FuncionarioTO funcionario) {
         try {
             serviceBusiness.adicionarFuncionario(funcionario);
             return ResponseEntity.ok().build();
@@ -33,14 +33,14 @@ public class ControllerFunc {
     }
 
     @GetMapping
-    public Iterable<FuncionarioDAO> listar() {
+    public Iterable<FuncionarioTO> listar() {
         return serviceBusiness.buscarOsFuncionarios();
 
 
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<FuncionarioDAO> deletarFuncionario(@PathVariable Integer id) throws IdNotFoundException {
+    public ResponseEntity<FuncionarioTO> deletarFuncionario(@PathVariable Integer id) throws IdNotFoundException {
 
         try {
             serviceBusiness.deletarOFuncionarioPeloIdInseridoPeloUsuario(id);
@@ -52,10 +52,10 @@ public class ControllerFunc {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Funcionario> alterarFuncionario(@RequestBody FuncionarioDAO funcionarioDAO, @PathVariable Integer id) throws IdNotFoundException {
+    public ResponseEntity<Funcionario> alterarFuncionario(@RequestBody FuncionarioTO funcionarioTO, @PathVariable Integer id) throws IdNotFoundException {
 
         try {
-            serviceBusiness.alterarFuncionarioPeloIdInserido(funcionarioDAO,id);
+            serviceBusiness.alterarFuncionarioPeloIdInserido(funcionarioTO,id);
             return ResponseEntity.ok().build();
         } catch (IdNotFoundException e) {
             return ResponseEntity.notFound().build();

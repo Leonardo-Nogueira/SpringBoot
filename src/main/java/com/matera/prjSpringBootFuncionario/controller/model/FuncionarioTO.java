@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
-public class FuncionarioDAO {
+public class FuncionarioTO {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -108,8 +108,8 @@ public class FuncionarioDAO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof FuncionarioDAO)) return false;
-        FuncionarioDAO that = (FuncionarioDAO) o;
+        if (!(o instanceof FuncionarioTO)) return false;
+        FuncionarioTO that = (FuncionarioTO) o;
         return Objects.equals(id, that.id);
     }
 
